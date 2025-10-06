@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎂 Happy Birthday Javinu 🎂</title>
+<style>
+  :root{
+    --bg:#0f0f1f;
+    --accent:#ff79c6;
+    --card:#151528;
+  }
+  html,body{height:100%;margin:0;overflow:hidden;font-family:"Poppins",sans-serif;color:#fff;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 30%,rgba(255,192,203,0.1),transparent 70%),var(--bg);
+  }
+
+  .card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    width:90%;
+    max-width:600px;
+    box-shadow:0 0 25px rgba(255,182,193,0.2);
+    position:relative;
+    z-index:2;
+  }
+
+  h1{font-size:2rem;margin:0;color:#ff9acb;text-shadow:0 0 10px rgba(255,182,193,0.6);}
+  p{opacity:0.9;}
+  input[type="password"]{
+    padding:10px 14px;border-radius:10px;border:none;
+    background:rgba(255,255,255,0.1);color:#fff;font-size:16px;outline:none;
+  }
+  button{
+    padding:10px 16px;border:none;border-radius:10px;margin-left:8px;
+    background:linear-gradient(90deg,#ff79c6,#ff92d1);
+    color:#fff;font-weight:bold;cursor:pointer;transition:0.3s;
+  }
+  button:hover{transform:scale(1.05);}
+  .feelings{
+    display:none;
+    margin-top:15px;
+    background:rgba(255,255,255,0.05);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(255,182,193,0.1);
+  }
+
+  .cake {
+    position: absolute;
+    font-size: 24px;
+    animation: fall 6s linear infinite;
+    opacity:0.8;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity:1;}
+    100% { transform: translateY(110vh) rotate(360deg); opacity:0;}
+  }
+
+  .hint{font-size:13px;color:#ccc;margin-top:8px;}
+</style>
+</head>
+<body>
+  <audio id="bgMusic" src="https://files.catbox.moe/j5k1d6.mp3" loop></audio>
+
+  <div class="card">
+    <h1>🎉 Happy Birthday Javinu🎉</h1>
+    <p>To my dearest friend — your day is as special as you are. 💖</p>
+    <div id="pwArea">
+      <input id="pwInput" type="password" placeholder="Enter password (e.g. 10/06)">
+      <button id="unlockBtn">Open Gift 🎁</button>
+      <p class="hint">Hint: use our special date 💞</p>
+    </div>
+    <div class="feelings" id="wishBox">
+      <h2>💌 My Birthday Wish For You 💌</h2>
+      <p>Happy Birthday To You My Dear Friend! 🎂✨</p>
+      <p>May your smile never fade, and your heart always be filled with joy and love. 💕</p>
+      <p>You deserve all the happiness in the world. 🎈</p>
+      <p>I wish our friendship never fade ❤️</p>
+      <button id="closeBtn">Close ❌</button>
+    </div>
+  </div>
+
+  <script>
+    const password = "10/06";
+    const unlockBtn = document.getElementById("unlockBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const pwInput = document.getElementById("pwInput");
+    const wishBox = document.getElementById("wishBox");
+    const pwArea = document.getElementById("pwArea");
+    const bgMusic = document.getElementById("bgMusic");
+
+    unlockBtn.onclick = () => {
+      if(pwInput.value.trim() === password){
+        wishBox.style.display = "block";
+        pwArea.style.display = "none";
+        bgMusic.play().catch(()=>{});
+      } else {
+        unlockBtn.textContent = "❌ Wrong! Try Again";
+        setTimeout(()=>unlockBtn.textContent="Open Gift 🎁",1500);
+      }
+    };
+
+    closeBtn.onclick = () => {
+      wishBox.style.display = "none";
+      pwArea.style.display = "block";
+      pwInput.value = "";
+    };
+
+    // Cake animation
+    const numCakes = 25;
+    for(let i=0;i<numCakes;i++){
+      const cake = document.createElement("div");
+      cake.classList.add("cake");
+      cake.textContent = "🎂";
+      cake.style.left = Math.random()*100+"vw";
+      cake.style.animationDuration = (4 + Math.random()*4)+"s";
+      cake.style.fontSize = (20 + Math.random()*20)+"px";
+      cake.style.animationDelay = Math.random()*5+"s";
+      document.body.appendChild(cake);
+    }
+  </script>
+</body>
+</html>
